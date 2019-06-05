@@ -1,0 +1,11 @@
+.discogs-link {
+    padding: 8px;
+    border: solid #ff5722 2px;
+    text-decoration: none;
+    border-radius: 5px;
+    box-shadow: 0px 2px 3px 0px #cccbcb;
+    font-family: monospace;
+    font-size: 13pt;
+    color: #ff5722;
+    font-weight: bold;
+}

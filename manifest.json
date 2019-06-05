@@ -1,0 +1,11 @@
+{
+    "manifest_version": 2,
+    "name": "Discogs Link for Google Play Music",
+    "version": "1.0.0",
+    "description": "why not?",
+    "content_scripts": [{
+        "css": ["styles.css"],
+        "js": ["app.js"],
+        "matches": ["https://play.google.com/music/*"]
+    }]
+}

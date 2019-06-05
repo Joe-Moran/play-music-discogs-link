@@ -1,7 +1,7 @@
 /**
  * The discog link element.
  */
-let a = document.createElement('a');
+let a = null;
 
 /**
  * The discog search link.
@@ -22,12 +22,20 @@ let currentAlbum = {
 window.addEventListener("load", _init);
 
 /**
- * Init function.
+ * Initializer function.
  */
 function _init() {
-    a.classList.add("discogs-link");
-    a.appendChild(document.createTextNode("Discogs Search"));
+    _buildButton();
     setInterval(() => this._checkCurrentAlbum(), 1000);
+}
+
+function _buildButton() {
+    a = document.createElement('a');
+    a.classList.add("discogs-link");
+    a.classList.add("inative");
+    a.appendChild(document.createTextNode("Discogs Search"));
+    let forwardElement = document.getElementById('player-bar-forward');
+    forwardElement.parentNode.insertBefore(a, forwardElement.nextSibling);
 }
 
 /**
@@ -53,13 +61,7 @@ function _checkCurrentAlbum() {
  * @param {album} the album 
  */
 function _buildDiscogsLink(album) {
-    discogsLink = "https://www.discogs.com/search/?q=" +
-        album.artist.replace(/\s/g, '+') + "+" +
-        album.album.replace(/\s/g, '+');
-
-    a.href = discogsLink;
-    a.remove();
-    let forwardElement = document.getElementById('player-bar-forward');
-    forwardElement.parentNode.insertBefore(a, forwardElement.nextSibling);
-
+    discogsLink = "https://www.discogs.com/search/?q=" + album.artist + "+" +
+        album.album;
+    a.href = discogsLink.replace(/\s/g, '+');
 }

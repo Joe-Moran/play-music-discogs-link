@@ -9,3 +9,8 @@
     color: #ff5722;
     font-weight: bold;
 }
+
+.discogs-link.inactive {
+    border-color: #d6d6d6;
+    color: #d6d6d6;
+}

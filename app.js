@@ -9,6 +9,11 @@ let a = null;
 let discogsLink = "";
 
 /**
+ * The class for the button when there isn't a link loaded.
+ */
+let inactiveClass = "inactive";
+
+/**
  * The currently playing album.
  */
 let currentAlbum = {
@@ -25,14 +30,14 @@ window.addEventListener("load", _init);
  * Initializer function.
  */
 function _init() {
-    _buildButton();
+    setTimeout(() => _buildButton(), 10000);
     setInterval(() => this._checkCurrentAlbum(), 1000);
 }
 
 function _buildButton() {
     a = document.createElement('a');
     a.classList.add("discogs-link");
-    a.classList.add("inative");
+    a.classList.add(inactiveClass);
     a.appendChild(document.createTextNode("Discogs Search"));
     let forwardElement = document.getElementById('player-bar-forward');
     forwardElement.parentNode.insertBefore(a, forwardElement.nextSibling);
@@ -52,7 +57,7 @@ function _checkCurrentAlbum() {
             album: albumName,
             artist: artist
         };
-        setTimeout(() => this._buildDiscogsLink(currentAlbum), 1000); // delay in case user just started playing music
+        this._buildDiscogsLink(currentAlbum);
     }
 }
 
@@ -63,5 +68,6 @@ function _checkCurrentAlbum() {
 function _buildDiscogsLink(album) {
     discogsLink = "https://www.discogs.com/search/?q=" + album.artist + "+" +
         album.album;
+    a.classList.remove(inactiveClass);
     a.href = discogsLink.replace(/\s/g, '+');
 }
